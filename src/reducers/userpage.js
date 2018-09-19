@@ -1,5 +1,5 @@
 const initialState = {
-  activePage: 'PageOne'
+  activePage: 'UserHome'
 };
 
 const userpage = (state = initialState, action) => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { changePage } from '../actions';
+import UserHomeNavBar from './UserHomeNavBar';
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -8,11 +9,12 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const PageTwo = ({ changePage }) => {
+const UserHome = ({ changePage }) => {
   return (
     <div>
-      <p>Page Two Here</p>
-      <button onClick={() => changePage('PageOne')}>Go to Page One</button>
+      <UserHomeNavBar />
+      <p>*List of Notes here*</p>
+      <button onClick={() => changePage('NewNote')}>Go to New Note</button>
     </div>
   );
 };
@@ -20,4 +22,4 @@ const PageTwo = ({ changePage }) => {
 export default connect(
   null,
   mapDispatchToProps
-)(PageTwo);
+)(UserHome);
