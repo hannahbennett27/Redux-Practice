@@ -5,10 +5,10 @@ import NewNote from './NewNote';
 import Note from './Note';
 
 const mapStateToProps = state => {
-  return { activePage: state.activePage };
+  return { activePage: state.activePage }; // FIX NESTED STATE! => COMPARE TO TODO EXAMPLE
 };
 
-const UserPage = ({ activePage }) => {
+const activePage = ({ activePage }) => {
   const noteRegExp = /\D+.txt/;
 
   switch (activePage) {
@@ -21,4 +21,4 @@ const UserPage = ({ activePage }) => {
   }
 };
 
-export default connect(mapStateToProps)(UserPage);
+export default connect(mapStateToProps)(activePage);

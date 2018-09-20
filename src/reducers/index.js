@@ -1,6 +1,7 @@
-// import { combineReducers } from 'redux';
-import userpage from './userpage';
+import { combineReducers } from 'redux';
+import notes from './notes';
+import activePage from './activePage';
 
-export default userpage;
+// export default activePage;
 
-// export default combineReducers({ userpage, etc... });
+export default combineReducers({ activePage, notes });

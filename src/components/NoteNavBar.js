@@ -15,7 +15,6 @@ const NoteNavBar = ({ changePage }) => {
         <button
           className="btn bg-light"
           type="button"
-          value="Back"
           onClick={() => changePage('UserHome')}
         >
           Back
