@@ -1,0 +1,9 @@
+{
+    "bucketName": "hbreduxapp78749a97f27e4559ae86233913e13248",
+    "authPolicyName": "s3_amplify_0ef758fb",
+    "unauthPolicyName": "s3_amplify_0ef758fb",
+    "authRoleName": "hbreduxapp-20180920140845-authRole",
+    "unauthRoleName": "hbreduxapp-20180920140845-unauthRole",
+    "authPermissions": "rw",
+    "unauthPermissions": ""
+}

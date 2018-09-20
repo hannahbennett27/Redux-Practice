@@ -1,6 +1,11 @@
+import Amplify /*, { Auth, Storage }*/ from 'aws-amplify';
+import { withAuthenticator } from 'aws-amplify-react';
+import aws_exports from '../aws-exports';
 import React, { Component } from 'react';
 import '../App.css';
 import ActivePage from './ActivePage';
+
+Amplify.configure(aws_exports);
 
 class App extends Component {
   render() {
@@ -21,4 +26,5 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withAuthenticator(App);
+// export default App;

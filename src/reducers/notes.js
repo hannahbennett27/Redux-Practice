@@ -1,28 +1,9 @@
-// // const initialState = {
-//   notes: [],
-// };
-
 let i = 0;
 
-const testNotesState = [
-  {
-    eTag: i++,
-    key: 'Title One.txt',
-    createdAt: Date.now(),
-    lastModified: Date.now(),
-    subnotes: ['Hello', 'World']
-  },
-  {
-    eTag: i++,
-    key: 'Title Two.txt',
-    createdAt: Date.now(),
-    lastModified: Date.now(),
-    subnotes: ['Goodbye']
-  }
-];
-
-const notes = (state = testNotesState, action) => {
+const notes = (state = [], action) => {
   switch (action.type) {
+    case 'STORAGE_CALL_SUCCESS':
+      return action.res;
     case 'CREATE_NOTE':
       return [
         ...state,
@@ -41,7 +22,25 @@ const notes = (state = testNotesState, action) => {
   }
 };
 
-export default notes;
+const notesLoading = (state = false, action) => {
+  switch (action.type) {
+    case 'STORAGE_CALL_LOADING':
+      return action.bool;
+    default:
+      return state;
+  }
+};
+
+const notesError = (state = false, action) => {
+  switch (action.type) {
+    case 'STORAGE_CALL_ERROR':
+      return action.bool;
+    default:
+      return state;
+  }
+};
+
+export { notes, notesLoading, notesError };
 
 // AMPLIFY GET CALLS
 

@@ -1,0 +1,53 @@
+{
+    "identityPoolName": "hbreduxappa12341d8_identitypool_a12341d8",
+    "allowUnauthenticatedIdentities": false,
+    "thirdPartyAuth": false,
+    "lambdaLogPolicy": "hbreduxappcognito_lambda_log_policy",
+    "openIdLambdaRoleName": "hbreduxappcognito_openid_lambda_role",
+    "openIdRolePolicy": "hbreduxappcognito_openid_pass_role_policy",
+    "openIdLambdaIAMPolicy": "hbreduxappcognito_openid_lambda_iam_policy",
+    "openIdLogPolicy": "hbreduxappcognito_openid_lambda_log_policy",
+    "userPoolName": "hbreduxappa12341d8_userpool_a12341d8",
+    "autoVerifiedAttributes": [
+        "email"
+    ],
+    "mfaConfiguration": "OFF",
+    "mfaTypes": [
+        "SMS Text Message"
+    ],
+    "roleName": "hbreduxappcognito_sns-role",
+    "roleExternalId": "hbreduxappcognito_role_external_id",
+    "policyName": "hbreduxappcognito-sns-policy",
+    "smsAuthenticationMessage": "Your authentication code is {####}",
+    "smsVerificationMessage": "Your verification code is {####}",
+    "emailVerificationSubject": "Your verification code",
+    "emailVerificationMessage": "Your verification code is {####}",
+    "defaultPasswordPolicy": true,
+    "passwordPolicyMinLength": 8,
+    "passwordPolicyCharacters": [],
+    "requiredAttributes": [
+        "name",
+        "email"
+    ],
+    "userpoolClientName": "hbreduxappcognito_app_client",
+    "userpoolClientGenerateSecret": true,
+    "userpoolClientRefreshTokenValidity": "30",
+    "userpoolClientReadAttributes": [
+        "email"
+    ],
+    "mfaLambdaRole": "hbreduxappcognito_totp_lambda_role",
+    "mfaLambdaLogPolicy": "hbreduxappcognito_totp_lambda_log_policy",
+    "mfaPassRolePolicy": "hbreduxappcognito_totp_pass_role_policy",
+    "mfaLambdaIAMPolicy": "hbreduxappcognito_totp_lambda_iam_policy",
+    "userpoolClientLambdaRole": "hbreduxappcognito_userpoolclient_lambda_role",
+    "userpoolClientLogPolicy": "hbreduxappcognito_userpoolclient_lambda_log_policy",
+    "userpoolClientLambdaPolicy": "hbreduxappcognito_userpoolclient_lambda_iam_policy",
+    "userpoolClientSetAttributes": false,
+    "useDefault": "manual",
+    "authSelections": "identityPoolAndUserPool",
+    "resourceName": "hbreduxappcognito",
+    "unAuthRoleName": "hbreduxapp-20180920140845-unauthRole",
+    "authRoleName": "hbreduxapp-20180920140845-authRole",
+    "unAuthRoleArn": "arn:aws:iam::723455457584:role/hbreduxapp-20180920140845-unauthRole",
+    "authRoleArn": "arn:aws:iam::723455457584:role/hbreduxapp-20180920140845-authRole"
+}

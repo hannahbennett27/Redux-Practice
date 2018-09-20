@@ -1,8 +1,6 @@
-// const initialState = {
-//   activePage: 'UserHome'
-// };
+const initialState = 'UserHome';
 
-const activePage = (state = 'UserHome', action) => {
+const activePage = (state = initialState, action) => {
   switch (action.type) {
     case 'CHANGE_PAGE':
       return action.page;

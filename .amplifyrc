@@ -1,0 +1,14 @@
+{
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "hbreduxapp-20180920140845-authRole",
+            "UnauthRoleArn": "arn:aws:iam::723455457584:role/hbreduxapp-20180920140845-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::723455457584:role/hbreduxapp-20180920140845-authRole",
+            "Region": "eu-west-1",
+            "DeploymentBucketName": "hbreduxapp-20180920140845-deployment",
+            "UnauthRoleName": "hbreduxapp-20180920140845-unauthRole",
+            "StackName": "hbreduxapp-20180920140845",
+            "StackId": "arn:aws:cloudformation:eu-west-1:723455457584:stack/hbreduxapp-20180920140845/4e0abd30-bcd6-11e8-80be-503ac9eaaa35"
+        }
+    }
+}
