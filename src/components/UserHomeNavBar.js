@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { changePage } from '../actions';
+import SignOut from './amplifyComponents';
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -28,7 +29,7 @@ const UserHomeNavBar = ({ changePage }) => {
             aria-labelledby="navbarDropdownMenuLink"
           >
             <a className="dropdown-item">Account</a>
-            {/* <SignOut /> */}
+            <SignOut />
           </div>
         </div>
         <div className="input-group-prepend" />

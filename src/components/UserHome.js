@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Storage } from 'aws-amplify';
-import { changePage, callError, callLoading, callSuccess } from '../actions';
+import { changePage, retrieveNotes } from '../actions';
 import UserHomeNavBar from './UserHomeNavBar';
 
 const mapStateToProps = state => {
@@ -15,16 +14,16 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     changePage: page => dispatch(changePage(page)),
-    callError: bool => dispatch(callError(bool)),
-    callLoading: bool => dispatch(callLoading(bool)),
-    callSuccess: res => dispatch(callSuccess(res))
-    // Insert Storage call function here?
+    retrieveNotes: () => retrieveNotes(dispatch)
   };
 };
 
 class UserHome extends Component {
+  state = { firstRender: true };
+
   componentDidMount = () => {
-    this.thunkNotesTest();
+    const { retrieveNotes } = this.props;
+    retrieveNotes();
   };
 
   render() {
@@ -44,7 +43,8 @@ class UserHome extends Component {
               <small className="text-muted">
                 <br />
                 Last modified {note.lastModified.toDateString()}
-                <br />- Content preview...?
+                <br />
+                {note.subnotes.length ? `- ${note.subnotes[0]}` : '...'}
               </small>
             </p>
           </button>
@@ -62,47 +62,9 @@ class UserHome extends Component {
         ) : (
           notesDisplay
         )}
-        {this.thunkNotesTestTwo()}
       </div>
     );
   }
-
-  // ==>> actions file??
-  thunkNotesTest = () => {
-    const { callError, callLoading, callSuccess } = this.props;
-    callLoading(true);
-    Storage.list('', { level: 'private' })
-      .then(notes => {
-        callLoading(false);
-        return notes;
-      })
-      .then(notes => {
-        callSuccess(notes);
-      })
-      .catch(error => callError(true));
-  };
-
-  thunkNotesTestTwo = () => {
-    const { callError, callLoading, callSuccess } = this.props;
-    // callLoading(true);
-    Storage.list('', { level: 'private' })
-      .then(notes =>
-        // Promise.all(notes.map(note => this.retrieveNoteData(note)))
-        notes.map(note => this.retrieveNoteData(note))
-      )
-      .then(noteData => console.log('NOTE DATA? >>>', noteData))
-      .catch(err => console.log('Thunk Error'));
-  };
-
-  retrieveNoteData = note => {
-    Storage.get(note.key, { level: 'private' })
-      .then(noteURL => fetch(noteURL))
-      .then(res => res.json())
-      .then(noteData => {
-        console.log({ ...note, ...noteData });
-        return { ...note, ...noteData };
-      });
-  };
 }
 
 export default connect(
