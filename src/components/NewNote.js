@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { changePage, createNote } from '../actions';
+import { createNote } from '../actions';
 import NoteNavBar from './NoteNavBar';
 
 const mapDispatchToProps = dispatch => {
   return {
-    changePage: page => dispatch(changePage(page)),
-    createNote: title => dispatch(createNote(title))
+    createNote: title => createNote(title, dispatch)
   };
 };
 
@@ -46,11 +45,9 @@ class NewNote extends Component {
 
   handleEnter = e => {
     const { newNoteTitle } = this.state;
-    const { changePage, createNote } = this.props;
-
+    const { createNote } = this.props;
     if (e.which === 13) {
       createNote(newNoteTitle);
-      changePage(`${newNoteTitle}.txt`);
     }
   };
 }

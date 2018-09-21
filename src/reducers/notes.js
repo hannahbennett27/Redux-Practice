@@ -1,22 +1,16 @@
-let i = 0;
-
 const notes = (state = [], action) => {
   switch (action.type) {
-    case 'STORAGE_CALL_SUCCESS':
-      return action.res;
-    case 'CREATE_NOTE':
-      return [
-        ...state,
-        {
-          eTag: i++,
-          key: `${action.title}.txt`,
-          createdAt: Date.now(), // => AMPLIFY CALL
-          lastModified: Date.now(),
-          subnotes: [] // => AMPLIFY CALL
-        }
-      ];
-    case 'ADD_SUBNOTE':
-      return state;
+    case 'GET_NOTES_CALL_SUCCESS':
+      return action.notes;
+    case 'CREATE_NOTE_CALL_SUCCESS':
+      return [...state, action.newNote]; // newNote missing Amplify eTag, size & lastModified properties until UserHome componentDidMount()
+    case 'ADD_SUBNOTE_CALL_SUCCESS':
+      return state.map(note => {
+        if (note.key === action.updatedNote.key) return action.updatedNote;
+        else return note;
+      });
+    case 'DELETE_NOTE_CALL_SUCCESS':
+      return state; // Deleted note removed from state by UserHome componentDidMount()
     default:
       return state;
   }
@@ -41,13 +35,3 @@ const notesError = (state = false, action) => {
 };
 
 export { notes, notesLoading, notesError };
-
-// AMPLIFY GET CALLS
-
-// Storage.list():
-// notes: [ { eTag: "", key: "", lastModified: AWS_DATE, size: 1 }, ... ]
-
-// Storage.get(filename):
-// activeNote: { createdAt: DATE.NOW, subnotes: [ "Hello", "World" ] } => CHAIN ON TO STORAGE.LIST CALL
-
-// Storage.put(title.txt, { createdAt: DATE.NOW, subnotes: [] })

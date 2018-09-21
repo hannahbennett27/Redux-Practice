@@ -28,11 +28,11 @@ class UserHome extends Component {
 
   render() {
     const { changePage, notes, notesLoading, notesError } = this.props;
+
     const notesDisplay = notes.map(note => {
       const titleRegExp = /(\D+).txt/;
       const noteTitle = titleRegExp.exec(note.key)[1];
-
-      return (
+      return note.eTag ? (
         <div className="card mx-auto" key={note.eTag}>
           <button
             className="note-title-btn btn btn-link"
@@ -42,14 +42,17 @@ class UserHome extends Component {
               <strong>{noteTitle}</strong>
               <small className="text-muted">
                 <br />
-                Last modified {note.lastModified.toDateString()}
+                {note.lastModified
+                  ? `Last modified ${note.lastModified.toDateString()}`
+                  : 'Last modified one moment ago'}
+
                 <br />
-                {note.subnotes.length ? `- ${note.subnotes[0]}` : '...'}
+                {note.subnotes.length ? `- ${note.subnotes[0]}...` : '...'}
               </small>
             </p>
           </button>
         </div>
-      );
+      ) : null;
     });
 
     return (

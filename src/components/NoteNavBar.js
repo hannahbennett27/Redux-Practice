@@ -1,14 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { changePage } from '../actions';
+import { changePage, deleteNote } from '../actions';
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    changePage: page => dispatch(changePage(page))
+    activePage: state.activePage
   };
 };
 
-const NoteNavBar = ({ changePage }) => {
+const mapDispatchToProps = dispatch => {
+  return {
+    changePage: page => dispatch(changePage(page)),
+    deleteNote: noteTitle => deleteNote(noteTitle, dispatch)
+  };
+};
+
+const NoteNavBar = ({ changePage, deleteNote, activePage }) => {
   return (
     <nav className="navbar navbar-light bg-light">
       <div className="input-group-prepend">
@@ -39,7 +46,7 @@ const NoteNavBar = ({ changePage }) => {
         <button
           type="button"
           className="btn bg-light"
-          //   onClick={handle...}
+          onClick={() => deleteNote(activePage)}
         >
           Delete
         </button>
@@ -49,6 +56,6 @@ const NoteNavBar = ({ changePage }) => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(NoteNavBar);
