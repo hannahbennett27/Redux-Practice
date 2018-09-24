@@ -21,12 +21,11 @@ const filterNotes = (notes, notesSearch) => {
   const searchRegExp = new RegExp(`${notesSearch}`, 'i'); // Whole word matching
 
   return notes.filter(note => {
-    if (
-      searchRegExp.test(note.key) ||
-      searchRegExp.test(note.subnotes.join(' '))
-    ) {
-      return note;
-    }
+    return searchRegExp.test(note.key)
+      ? note
+      : searchRegExp.test(note.subnotes.join(' '))
+        ? note
+        : null;
   });
 };
 
