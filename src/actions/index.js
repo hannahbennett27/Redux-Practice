@@ -5,6 +5,16 @@ export const changePage = page => ({
   page
 });
 
+export const updateSort = sortCriteria => ({
+  type: 'UPDATE_SORT',
+  sortCriteria
+});
+
+export const updateSearch = searchCriteria => ({
+  type: 'UPDATE_SEARCH',
+  searchCriteria
+});
+
 const callError = bool => ({
   type: 'STORAGE_CALL_ERROR',
   bool
@@ -110,10 +120,8 @@ export const deleteNote = (noteTitle, dispatch) => {
       dispatch(callLoading(false));
       dispatch(deleteNoteCallSuccess());
       dispatch(changePage('UserHome'));
-
-      // Return to UserHome page
     })
     .catch(() => dispatch(callError(true)));
 };
 
-// Should 'dispatch()' append all action calls??
+// Should 'dispatch()' append all action calls?? i.e. "addSubnoteCallSuccess"

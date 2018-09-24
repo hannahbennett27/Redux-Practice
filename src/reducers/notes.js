@@ -34,4 +34,22 @@ const notesError = (state = false, action) => {
   }
 };
 
-export { notes, notesLoading, notesError };
+const notesSort = (state = 'Sort A-Z', action) => {
+  switch (action.type) {
+    case 'UPDATE_SORT':
+      return action.sortCriteria;
+    default:
+      return state;
+  }
+};
+
+const notesSearch = (state = '', action) => {
+  switch (action.type) {
+    case 'UPDATE_SEARCH':
+      return action.searchCriteria;
+    default:
+      return state;
+  }
+};
+
+export { notes, notesLoading, notesError, notesSort, notesSearch };

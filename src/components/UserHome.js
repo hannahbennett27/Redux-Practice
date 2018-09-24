@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { changePage, retrieveNotes } from '../actions';
+import { retrieveNotes } from '../actions';
+import VisibleNotes from './VisibleNotes';
 import UserHomeNavBar from './UserHomeNavBar';
 
 const mapStateToProps = state => {
   return {
-    notes: state.notes,
     notesLoading: state.notesLoading,
     notesError: state.notesError
   };
@@ -13,47 +13,18 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    changePage: page => dispatch(changePage(page)),
     retrieveNotes: () => retrieveNotes(dispatch)
   };
 };
 
 class UserHome extends Component {
-  state = { firstRender: true };
-
   componentDidMount = () => {
     const { retrieveNotes } = this.props;
     retrieveNotes();
   };
 
   render() {
-    const { changePage, notes, notesLoading, notesError } = this.props;
-
-    const notesDisplay = notes.map(note => {
-      const titleRegExp = /(\D+).txt/;
-      const noteTitle = titleRegExp.exec(note.key)[1];
-      return note.eTag ? (
-        <div className="card mx-auto" key={note.eTag}>
-          <button
-            className="note-title-btn btn btn-link"
-            onClick={() => changePage(note.key)}
-          >
-            <p className="card-body">
-              <strong>{noteTitle}</strong>
-              <small className="text-muted">
-                <br />
-                {note.lastModified
-                  ? `Last modified ${note.lastModified.toDateString()}`
-                  : 'Last modified one moment ago'}
-
-                <br />
-                {note.subnotes.length ? `- ${note.subnotes[0]}...` : '...'}
-              </small>
-            </p>
-          </button>
-        </div>
-      ) : null;
-    });
+    const { notesLoading, notesError } = this.props;
 
     return (
       <div>
@@ -63,7 +34,7 @@ class UserHome extends Component {
         ) : notesLoading ? (
           <p>Notes loading...</p>
         ) : (
-          notesDisplay
+          <VisibleNotes />
         )}
       </div>
     );
