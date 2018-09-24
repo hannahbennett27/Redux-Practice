@@ -38,7 +38,9 @@ class UserHomeNavBar extends Component {
               className="dropdown-menu"
               aria-labelledby="navbarDropdownMenuLink"
             >
-              <a className="dropdown-item">Account</a>
+              <a className="dropdown-item disabled" style={{ color: 'grey' }}>
+                Account
+              </a>
               <SignOut />
             </div>
           </div>
@@ -105,7 +107,7 @@ class UserHomeNavBar extends Component {
               value="NewNote"
               onClick={() => changePage('NewNote')}
             >
-              New
+              {'➕'}
             </button>
           </div>
         </div>

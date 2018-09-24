@@ -33,7 +33,7 @@ class Note extends Component {
     const noteTitle = titleRegExp.exec(activeNote.key)[1];
     const noteDisplay = (
       <div className="card mx-auto">
-        <p className="card-body">
+        <div className="card-body">
           <strong>{noteTitle}</strong>
           {activeNote.subnotes.map((subnote, index) => {
             return (
@@ -51,7 +51,7 @@ class Note extends Component {
             onChange={this.handleChange}
             onKeyPress={e => this.handleEnter(e, activeNote)}
           />
-        </p>
+        </div>
       </div>
     );
 

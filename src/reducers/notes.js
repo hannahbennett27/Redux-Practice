@@ -52,4 +52,13 @@ const notesSearch = (state = '', action) => {
   }
 };
 
-export { notes, notesLoading, notesError, notesSort, notesSearch };
+const isEditing = (state = false, action) => {
+  switch (action.type) {
+    case 'TOGGLE_IS_EDITING':
+      return action.bool;
+    default:
+      return state;
+  }
+};
+
+export { notes, notesLoading, notesError, notesSort, notesSearch, isEditing };

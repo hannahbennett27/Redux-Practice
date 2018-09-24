@@ -3,12 +3,16 @@ import { connect } from 'react-redux';
 import UserHome from './UserHome';
 import NewNote from './NewNote';
 import Note from './Note';
+import EditNote from './EditNote';
 
 const mapStateToProps = state => {
-  return { activePage: state.activePage }; // FIX NESTED STATE! => COMPARE TO TODO EXAMPLE
+  return {
+    activePage: state.activePage,
+    isEditing: state.isEditing
+  };
 };
 
-const activePage = ({ activePage }) => {
+const activePage = ({ activePage, isEditing }) => {
   const noteRegExp = /\D+.txt/;
 
   switch (activePage) {
@@ -17,7 +21,15 @@ const activePage = ({ activePage }) => {
     case 'NewNote':
       return <NewNote />;
     default:
-      return noteRegExp.test(activePage) ? <Note /> : <div>Default Page</div>;
+      return noteRegExp.test(activePage) ? (
+        isEditing ? (
+          <EditNote />
+        ) : (
+          <Note />
+        )
+      ) : (
+        <div>Default Page</div>
+      );
   }
 };
 

@@ -16,7 +16,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const NoteNavBar = ({
+const EditNoteNavBar = ({
   changePage,
   deleteNote,
   activePage,
@@ -38,16 +38,9 @@ const NoteNavBar = ({
         <button
           type="button"
           className="btn bg-light"
-          //   onClick={handle...}
+          // onClick={() => ..... save}
         >
-          {'ℹ️'}
-        </button>
-        <button
-          type="button"
-          className="btn bg-light"
-          onClick={() => toggleIsEditing(true)}
-        >
-          {'🖋️'}
+          {'✅'}
         </button>
         <button
           type="button"
@@ -64,4 +57,4 @@ const NoteNavBar = ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(NoteNavBar);
+)(EditNoteNavBar);

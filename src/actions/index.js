@@ -5,6 +5,11 @@ export const changePage = page => ({
   page
 });
 
+export const toggleIsEditing = bool => ({
+  type: 'TOGGLE_IS_EDITING',
+  bool
+});
+
 export const updateSort = sortCriteria => ({
   type: 'UPDATE_SORT',
   sortCriteria

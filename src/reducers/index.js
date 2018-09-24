@@ -4,7 +4,8 @@ import {
   notesLoading,
   notesError,
   notesSort,
-  notesSearch
+  notesSearch,
+  isEditing
 } from './notes';
 import activePage from './activePage';
 
@@ -14,5 +15,6 @@ export default combineReducers({
   notesLoading,
   notesError,
   notesSort,
-  notesSearch
+  notesSearch,
+  isEditing
 });
