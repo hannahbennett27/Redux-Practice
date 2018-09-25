@@ -20,7 +20,12 @@ const mapDispatchToProps = dispatch => {
 };
 
 class EditNote extends Component {
-  state = {};
+  state = {
+    originalKey: '',
+    noteTitle: '',
+    createdAt: '',
+    subnotes: []
+  };
 
   componentDidMount = () => {
     const { activePage, notes } = this.props;
@@ -34,6 +39,7 @@ class EditNote extends Component {
     this.setState({
       originalKey: activeNote.key,
       noteTitle,
+      createdAt: activeNote.createdAt,
       subnotes: activeNote.subnotes
     });
   };
@@ -63,7 +69,7 @@ class EditNote extends Component {
                   </small>
                   {subnotes.map((subnote, index) => {
                     return (
-                      <div className="input-group" key={index}>
+                      <div className="input-group" key={`${subnote}${index}`}>
                         <input
                           type="text"
                           className="form-control form-control-sm text-muted"
@@ -77,7 +83,7 @@ class EditNote extends Component {
                             className="btn bg-white bin-button"
                             type="button"
                             value={index}
-                            // onClick={...}
+                            onClick={this.handleDeleteSubnote}
                           >
                             {'🗑️'}
                           </button>
@@ -126,9 +132,15 @@ class EditNote extends Component {
 
   handleSave = () => {
     const { editNote } = this.props;
-    const { originalKey, noteTitle, subnotes } = this.state;
-    const updatedNote = { subnotes };
+    const { originalKey, noteTitle, createdAt, subnotes } = this.state;
+    const updatedNote = { createdAt, subnotes };
     editNote(originalKey, updatedNote, `${noteTitle}.txt`);
+  };
+
+  handleDeleteSubnote = e => {
+    const updatedState = this.state;
+    updatedState.subnotes.splice(e.target.value, 1);
+    this.setState(updatedState);
   };
 }
 

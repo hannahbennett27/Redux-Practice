@@ -12,6 +12,7 @@ const notes = (state = [], action) => {
       });
     case 'EDIT_NOTE_CALL_SUCCESS':
       return state.map(note => {
+        // console.log(note);
         const {
           key,
           updatedNote: { subnotes }

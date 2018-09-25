@@ -76,7 +76,6 @@ class Note extends Component {
     if (e.which === 13) {
       const { updateSubnotes, activePage: noteTitle } = this.props;
       const updatedNote = this.formatUpdatedNote(activeNote);
-      console.log(updatedNote);
       updateSubnotes(updatedNote, noteTitle);
       this.setState({ newSubnote: '' });
     }
