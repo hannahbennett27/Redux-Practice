@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import NoteNavBar from './NoteNavBar';
-import { addSubnote } from '../actions';
+import { updateSubnotes } from '../actions';
 
 const mapStateToProps = state => {
   return {
@@ -14,14 +14,13 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addSubnote: (updatedNote, noteTitle) =>
-      addSubnote(updatedNote, noteTitle, dispatch)
+    updateSubnotes: (updatedNote, noteTitle) =>
+      updateSubnotes(updatedNote, noteTitle, dispatch)
   };
 };
 
 class Note extends Component {
   state = { newSubnote: '' };
-
   render() {
     const { activePage, notes, notesLoading, notesError } = this.props;
     const { newSubnote } = this.state;
@@ -73,19 +72,22 @@ class Note extends Component {
     this.setState({ newSubnote: e.target.value });
   };
 
-  // addSubnote(updatedNote, noteTitle)
   handleEnter = (e, activeNote) => {
     if (e.which === 13) {
-      const { addSubnote, activePage: noteTitle } = this.props;
+      const { updateSubnotes, activePage: noteTitle } = this.props;
       const updatedNote = this.formatUpdatedNote(activeNote);
-      addSubnote(updatedNote, noteTitle);
+      console.log(updatedNote);
+      updateSubnotes(updatedNote, noteTitle);
       this.setState({ newSubnote: '' });
     }
   };
 
   formatUpdatedNote = previousNote => {
     const { newSubnote } = this.state;
-    const updatedNote = previousNote;
+    const updatedNote = {
+      createdAt: previousNote.createdAt,
+      subnotes: previousNote.subnotes
+    };
     updatedNote.subnotes.push(newSubnote);
     delete updatedNote.lastModified;
     return updatedNote;

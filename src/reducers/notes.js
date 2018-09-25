@@ -2,11 +2,18 @@ const notes = (state = [], action) => {
   switch (action.type) {
     case 'GET_NOTES_CALL_SUCCESS':
       return action.notes;
-    case 'CREATE_NOTE_CALL_SUCCESS':
-      return [...state, action.newNote]; // newNote missing Amplify eTag, size & lastModified properties until UserHome componentDidMount()
-    case 'ADD_SUBNOTE_CALL_SUCCESS':
+    case 'CREATE_NOTE_CALL_SUCCESS': // New Note missing Amplify eTag, size & lastModified properties until UserHome componentDidMount()
+      return [...state, action.newNote];
+    case 'UPDATE_SUBNOTES_CALL_SUCCESS':
       return state.map(note => {
-        if (note.key === action.updatedNote.key) return action.updatedNote;
+        if (note.key === action.updatedNote.key)
+          return { ...action.updatedNote };
+        else return note;
+      });
+    case 'EDIT_NOTE_CALL_SUCCESS': // Edited Note (TITLE CHANGE ONLY) missing Amplify eTag, size & lastModified properties until UserHome componentDidMount()
+      return state.map(note => {
+        if (note.key === action.originalTitle)
+          return { ...action.updatedNote, key: action.noteTitle };
         else return note;
       });
     case 'DELETE_NOTE_CALL_SUCCESS':

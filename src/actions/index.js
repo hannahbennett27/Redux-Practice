@@ -96,12 +96,12 @@ export const createNote = (title, dispatch) => {
     .catch(() => dispatch(callError(true)));
 };
 
-const addSubnoteCallSuccess = updatedNote => ({
-  type: 'ADD_SUBNOTE_CALL_SUCCESS',
+const updateSubnotesCallSuccess = updatedNote => ({
+  type: 'UPDATE_SUBNOTES_CALL_SUCCESS',
   updatedNote
 });
 
-export const addSubnote = (updatedNote, noteTitle, dispatch) => {
+export const updateSubnotes = (updatedNote, noteTitle, dispatch) => {
   dispatch(callLoading(true));
   Storage.put(noteTitle, JSON.stringify(updatedNote), {
     level: 'private',
@@ -109,9 +109,40 @@ export const addSubnote = (updatedNote, noteTitle, dispatch) => {
   })
     .then(() => {
       dispatch(callLoading(false));
-      addSubnoteCallSuccess(updatedNote);
+      updateSubnotesCallSuccess(updatedNote);
     })
     .catch(() => dispatch(callError(true)));
+};
+
+const editNoteCallSuccess = (originalTitle, updatedNote, noteTitle) => ({
+  type: 'EDIT_NOTE_CALL_SUCCESS',
+  originalTitle,
+  updatedNote,
+  noteTitle
+});
+
+export const editNote = (originalTitle, updatedNote, noteTitle, dispatch) => {
+  if (originalTitle === noteTitle) {
+    updateSubnotes(updatedNote, noteTitle, dispatch);
+    dispatch(toggleIsEditing(false));
+  } else {
+    console.log('EDIT NOTE - NEW TITLE!');
+    dispatch(callLoading(true));
+    Storage.remove(originalTitle, { level: 'private' })
+      .then(() => {
+        Storage.put(noteTitle, JSON.stringify(updatedNote), {
+          level: 'private',
+          contentType: 'JSON'
+        });
+      })
+      .then(() => {
+        dispatch(callLoading(false));
+        dispatch(editNoteCallSuccess(originalTitle, updatedNote, noteTitle));
+        dispatch(changePage(noteTitle));
+        dispatch(toggleIsEditing(false));
+      })
+      .catch(() => dispatch(callError(true)));
+  }
 };
 
 const deleteNoteCallSuccess = () => ({
@@ -129,4 +160,4 @@ export const deleteNote = (noteTitle, dispatch) => {
     .catch(() => dispatch(callError(true)));
 };
 
-// Should 'dispatch()' append all action calls?? i.e. "addSubnoteCallSuccess"
+// Should 'dispatch()' append all action calls?? i.e. "updateSubnotesCallSuccess"
