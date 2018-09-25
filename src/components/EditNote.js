@@ -34,7 +34,6 @@ class EditNote extends Component {
     this.setState({
       originalKey: activeNote.key,
       noteTitle,
-      createdAt: activeNote.createdAt,
       subnotes: activeNote.subnotes
     });
   };
@@ -127,8 +126,8 @@ class EditNote extends Component {
 
   handleSave = () => {
     const { editNote } = this.props;
-    const { originalKey, noteTitle, createdAt, subnotes } = this.state;
-    const updatedNote = { createdAt, subnotes };
+    const { originalKey, noteTitle, subnotes } = this.state;
+    const updatedNote = { subnotes };
     editNote(originalKey, updatedNote, `${noteTitle}.txt`);
   };
 }

@@ -114,11 +114,11 @@ export const updateSubnotes = (updatedNote, noteTitle, dispatch) => {
     .catch(() => dispatch(callError(true)));
 };
 
-const editNoteCallSuccess = (originalTitle, updatedNote, noteTitle) => ({
+const editNoteCallSuccess = (originalTitle, updatedNote, key) => ({
   type: 'EDIT_NOTE_CALL_SUCCESS',
   originalTitle,
   updatedNote,
-  noteTitle
+  key
 });
 
 export const editNote = (originalTitle, updatedNote, noteTitle, dispatch) => {
@@ -126,18 +126,17 @@ export const editNote = (originalTitle, updatedNote, noteTitle, dispatch) => {
     updateSubnotes(updatedNote, noteTitle, dispatch);
     dispatch(toggleIsEditing(false));
   } else {
-    console.log('EDIT NOTE - NEW TITLE!');
     dispatch(callLoading(true));
     Storage.remove(originalTitle, { level: 'private' })
       .then(() => {
-        Storage.put(noteTitle, JSON.stringify(updatedNote), {
+        return Storage.put(noteTitle, JSON.stringify(updatedNote), {
           level: 'private',
           contentType: 'JSON'
         });
       })
-      .then(() => {
+      .then(({ key }) => {
         dispatch(callLoading(false));
-        dispatch(editNoteCallSuccess(originalTitle, updatedNote, noteTitle));
+        dispatch(editNoteCallSuccess(originalTitle, updatedNote, key));
         dispatch(changePage(noteTitle));
         dispatch(toggleIsEditing(false));
       })

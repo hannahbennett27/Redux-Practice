@@ -10,11 +10,15 @@ const notes = (state = [], action) => {
           return { ...action.updatedNote };
         else return note;
       });
-    case 'EDIT_NOTE_CALL_SUCCESS': // Edited Note (TITLE CHANGE ONLY) missing Amplify eTag, size & lastModified properties until UserHome componentDidMount()
+    case 'EDIT_NOTE_CALL_SUCCESS':
       return state.map(note => {
-        if (note.key === action.originalTitle)
-          return { ...action.updatedNote, key: action.noteTitle };
-        else return note;
+        const {
+          key,
+          updatedNote: { subnotes }
+        } = action;
+        if (note.key === action.originalTitle) {
+          return { ...note, key, subnotes };
+        } else return note;
       });
     case 'DELETE_NOTE_CALL_SUCCESS':
       return state; // Deleted note removed from state by UserHome componentDidMount()
@@ -22,6 +26,8 @@ const notes = (state = [], action) => {
       return state;
   }
 };
+
+// editNoteCallSuccess(originalTitle, updatedNote, key)
 
 const notesLoading = (state = false, action) => {
   switch (action.type) {
