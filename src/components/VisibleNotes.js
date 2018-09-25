@@ -77,7 +77,9 @@ const VisibleNotes = ({ changePage, notes, notesSort, notesSearch }) => {
                 : 'Last modified one moment ago'}
 
               <br />
-              {note.subnotes.length ? `- ${note.subnotes[0]}...` : '...'}
+              {note.subnotes.length
+                ? `- ${note.subnotes[0].slice(0, 40)}...`
+                : '...'}
             </small>
           </p>
         </button>

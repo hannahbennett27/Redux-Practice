@@ -10,20 +10,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 10vh;
+  height: 8vh;
   width: 100vw;
-  border-bottom: 3px black solid;
-  margin: 0.5em 0;
+  border-bottom: 3px #1464be solid;
+  margin-top: 0.5em;
 }
 
 .App-title {
   font-size: 2em;
+  color: #1464be;
 }
 
 .card {
   width: 90%;
-  max-width: 20em;
-  margin-top: 3%;
+  margin: 0.5rem 0;
   /* max-height: 85vh; */
 }
 
@@ -39,7 +39,6 @@
 
 .navbar {
   padding: 0;
-  margin: 5px;
 }
 
 /* .bottom-p-tag {
