@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { changePage, updateSort, updateSearch } from '../actions';
-import SignOut from './amplifyComponents';
+import SignOut from '../amplifyComponents';
 
 const mapStateToProps = state => {
   return { notesSearch: state.notesSearch };

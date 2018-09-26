@@ -13,7 +13,7 @@ const mapStateToProps = state => {
 };
 
 const activePage = ({ activePage, isEditing }) => {
-  const noteRegExp = /\D+.txt/;
+  const noteRegExp = /.+.txt/;
 
   switch (activePage) {
     case 'UserHome':

@@ -70,7 +70,7 @@ export const createNote = (title, dispatch) => {
   Storage.list(`${title}.txt`, { level: 'private' })
     .then(res => {
       if (res.length) {
-        throw new Error('username exists');
+        throw new Error('ERROR TBC');
       } else {
         return Storage.put(
           `${title}.txt`,
@@ -93,7 +93,7 @@ export const createNote = (title, dispatch) => {
       dispatch(createNoteCallSuccess(noteData));
       dispatch(changePage(noteData.key));
     })
-    .catch(() => dispatch(callError(true)));
+    .catch(() => dispatch(callError(true))); // ===>>> console.log error msg & dispatch callError
 };
 
 const updateSubnotesCallSuccess = updatedNote => ({

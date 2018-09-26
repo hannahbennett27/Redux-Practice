@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// import { Auth } from 'aws-amplify';
 import { retrieveNotes } from '../actions';
 import VisibleNotes from './VisibleNotes';
 import UserHomeNavBar from './UserHomeNavBar';
@@ -21,6 +22,12 @@ class UserHome extends Component {
   componentDidMount = () => {
     const { retrieveNotes } = this.props;
     retrieveNotes();
+    // Auth.currentAuthenticatedUser()
+    //   .then(user => {
+    //     console.log(user);
+    //     retrieveNotes();
+    //   })
+    //   .catch(err => console.log(err));
   };
 
   render() {

@@ -1,21 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { deleteNote, toggleIsEditing } from '../actions';
 
-const mapStateToProps = state => {
-  return {
-    activePage: state.activePage
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    deleteNote: noteTitle => deleteNote(noteTitle, dispatch),
-    toggleIsEditing: bool => dispatch(toggleIsEditing(bool))
-  };
-};
-
-const EditNoteNavBar = ({ deleteNote, activePage, toggleIsEditing }) => {
+const EditNoteNavBarComp = ({ deleteNote, activePage, toggleIsEditing }) => {
   return (
     <nav className="navbar navbar-light bg-light">
       <div className="input-group-prepend">
@@ -40,7 +25,4 @@ const EditNoteNavBar = ({ deleteNote, activePage, toggleIsEditing }) => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EditNoteNavBar);
+export default EditNoteNavBarComp;
