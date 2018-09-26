@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createNote } from '../actions';
-import NoteNavBar from './NoteNavBar';
+import NewNoteNavBar from './NewNoteNavBar';
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -15,7 +15,7 @@ class NewNote extends Component {
   render() {
     return (
       <div>
-        <NoteNavBar />
+        <NewNoteNavBar />
         <div className="card mx-auto">
           <p className="card-body">
             <input

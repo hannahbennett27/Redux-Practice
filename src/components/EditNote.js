@@ -33,7 +33,7 @@ class EditNote extends Component {
       if (el.key === activePage) acc = el;
       return acc;
     }, {});
-    const titleRegExp = /(\D+).txt/;
+    const titleRegExp = /(.+).txt/;
     const noteTitle = titleRegExp.exec(activeNote.key)[1];
 
     this.setState({
@@ -123,7 +123,7 @@ class EditNote extends Component {
   }
 
   handleChange = (e, index) => {
-    let noteEdit = this.state;
+    let noteEdit = { ...this.state };
     index !== undefined
       ? (noteEdit[e.target.name][index] = e.target.value)
       : (noteEdit[e.target.name] = e.target.value);

@@ -21,6 +21,7 @@ const mapDispatchToProps = dispatch => {
 
 class Note extends Component {
   state = { newSubnote: '' };
+
   render() {
     const { activePage, notes, notesLoading, notesError } = this.props;
     const { newSubnote } = this.state;
@@ -28,7 +29,7 @@ class Note extends Component {
       if (el.key === activePage) acc = el;
       return acc;
     }, {});
-    const titleRegExp = /(\D+).txt/;
+    const titleRegExp = /(.+).txt/;
     const noteTitle = titleRegExp.exec(activeNote.key)[1];
     const noteDisplay = (
       <div className="card mx-auto">

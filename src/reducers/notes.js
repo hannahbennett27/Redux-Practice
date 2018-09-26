@@ -12,13 +12,12 @@ const notes = (state = [], action) => {
       });
     case 'EDIT_NOTE_CALL_SUCCESS':
       return state.map(note => {
-        // console.log(note);
         const {
           key,
-          updatedNote: { subnotes }
+          updatedNote: { createdAt, subnotes }
         } = action;
         if (note.key === action.originalTitle) {
-          return { ...note, key, subnotes };
+          return { ...note, key, createdAt, subnotes };
         } else return note;
       });
     case 'DELETE_NOTE_CALL_SUCCESS':

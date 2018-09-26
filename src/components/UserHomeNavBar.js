@@ -52,6 +52,7 @@ class UserHomeNavBar extends Component {
             onChange={this.handleSearchChange}
             onKeyPress={this.handleSearchEnter}
           />
+
           <div className="input-group-append">
             <button
               type="button"
