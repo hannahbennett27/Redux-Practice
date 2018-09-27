@@ -16,7 +16,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const NoteNavBar = ({
+export const NoteNavBar = ({
   changePage,
   deleteNote,
   activePage,

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from './enzyme';
 import { NewNoteNavBar } from '../containers/NewNoteNavBar';
 
-describe('NewNoteNavBar Component', () => {
+describe.skip('NewNoteNavBar Component', () => {
   let wrapper;
   const buttonCount = 1;
   const mockFunction = jest.fn();
@@ -21,7 +21,6 @@ describe('NewNoteNavBar Component', () => {
 
   it('Should call mockFunction when navbar button is clicked', () => {
     wrapper.find('button').simulate('click');
-    // expect(mockFunction.mock.calls.length).toBe(buttonCount);
     expect(mockFunction).toHaveBeenCalledTimes(buttonCount);
   });
 
@@ -30,7 +29,7 @@ describe('NewNoteNavBar Component', () => {
     expect(backButton.props().name).toEqual('back');
   });
 
-  it.only('Back button should call changePage/mockFunction with the string UserHome', () => {
+  it('Back button should call changePage/mockFunction with the string UserHome', () => {
     wrapper
       .find('button')
       .at(0)

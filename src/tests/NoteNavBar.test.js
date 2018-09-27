@@ -1,19 +1,20 @@
 import React from 'react';
 import { shallow } from './enzyme';
-import { EditNoteNavBar } from '../containers/EditNoteNavBar';
+import { NoteNavBar } from '../containers/NoteNavBar';
 
-describe.skip('EditNoteNavBar Component', () => {
+describe.skip('NoteNavBar Component', () => {
   let wrapper;
-  const buttonCount = 2;
+  const buttonCount = 4;
   const mockFunction = jest.fn();
   const mockActivePage = 'Test Note.txt';
 
   beforeEach(() => {
     wrapper = shallow(
-      <EditNoteNavBar
+      <NoteNavBar
+        changePage={mockFunction}
         deleteNote={mockFunction}
-        toggleIsEditing={mockFunction}
         activePage={mockActivePage}
+        toggleIsEditing={mockFunction}
       />
     );
   });
@@ -39,23 +40,49 @@ describe.skip('EditNoteNavBar Component', () => {
     expect(backButton.props().name).toEqual('back');
   });
 
-  it('Back button should call toggleIsEditing/mockFunction with false bool', () => {
+  it('Back button should call changePage/mockFunction with the string UserHome', () => {
     wrapper
       .find('button')
       .at(0)
       .simulate('click');
-    expect(mockFunction).toHaveBeenCalledWith(false);
+    expect(mockFunction).toHaveBeenCalledWith('UserHome');
   });
 
-  it('Delete button should be at index 1', () => {
-    const deleteButton = wrapper.find('button').at(1);
+  it('Info button should be at index 1', () => {
+    const infoButton = wrapper.find('button').at(1);
+    expect(infoButton.props().name).toEqual('info');
+  });
+
+  it('Info button should call TBC/mockFunction with the TYPE+TBC', () => {
+    wrapper
+      .find('button')
+      .at(1)
+      .simulate('click');
+    expect(mockFunction).toHaveBeenCalledWith('TBC');
+  });
+
+  it('Edit button should be at index 2', () => {
+    const editButton = wrapper.find('button').at(2);
+    expect(editButton.props().name).toEqual('edit');
+  });
+
+  it('Edit button should call toggleIsEditing/mockFunction with true bool', () => {
+    wrapper
+      .find('button')
+      .at(2)
+      .simulate('click');
+    expect(mockFunction).toHaveBeenCalledWith(true);
+  });
+
+  it('Delete button should be at index 3', () => {
+    const deleteButton = wrapper.find('button').at(3);
     expect(deleteButton.props().name).toEqual('delete');
   });
 
   it('Delete button should call deleteNote/mockFunction with the string activePage/mockActivePage', () => {
     wrapper
       .find('button')
-      .at(1)
+      .at(3)
       .simulate('click');
     expect(mockFunction).toHaveBeenCalledWith(mockActivePage);
   });
