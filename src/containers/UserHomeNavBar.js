@@ -15,7 +15,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-class UserHomeNavBar extends Component {
+export class UserHomeNavBar extends Component {
   state = { searchCriteria: '' };
 
   render() {
@@ -24,7 +24,7 @@ class UserHomeNavBar extends Component {
     return (
       <nav className="navbar navbar-light bg-light">
         <div className="input-group">
-          <div className="nav-item dropdown">
+          <div className="nav-item dropdown" name="account-dropdown">
             <button
               type="button"
               className="btn bg-light dropdown-toggle-split"
@@ -38,80 +38,85 @@ class UserHomeNavBar extends Component {
               className="dropdown-menu"
               aria-labelledby="navbarDropdownMenuLink"
             >
-              <a className="dropdown-item disabled" style={{ color: 'grey' }}>
-                Account
-              </a>
+              <button
+                className="dropdown-item disabled"
+                style={{ color: 'grey' }}
+                name="account"
+              >
+                Account!
+              </button>
               <SignOut />
             </div>
           </div>
-          <div className="input-group-prepend" />
           <input
             type="text"
             className="search form-control bg-light"
+            name="search"
             placeholder={notesSearch ? notesSearch : 'Search...'}
             onChange={this.handleSearchChange}
             onKeyPress={this.handleSearchEnter}
           />
-
-          <div className="input-group-append">
+          <div
+            className="input-group-append nav-item dropdown"
+            name="sort-dropdown"
+          >
             <button
               type="button"
-              className="btn bg-light dropdown-toggle dropdown-toggle-split"
+              className="btn bg-light dropdown-toggle-split"
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <span className="sr-only">Toggle Dropdown</span>
-              {/* Sort Menu Toggle */}
+              {'⬇️️'}
             </button>
             <div className="dropdown-menu">
-              <a
+              <button
                 className="dropdown-item"
                 name="Show All"
                 onClick={e => this.handleDropdownClick(e)}
               >
                 Show All
-              </a>
+              </button>
               <div className="dropdown-divider" />
-              <a
+              <button
                 className="dropdown-item"
                 name="Sort A-Z"
                 onClick={e => this.handleDropdownClick(e)}
               >
                 Sort A-Z
-              </a>
-              <a
+              </button>
+              <button
                 className="dropdown-item"
                 name="Sort Z-A"
                 onClick={e => this.handleDropdownClick(e)}
               >
                 Sort Z-A
-              </a>
-              <a
+              </button>
+              <button
                 className="dropdown-item"
                 name="Newest First"
                 onClick={e => this.handleDropdownClick(e)}
               >
                 Newest First
-              </a>
-              <a
+              </button>
+              <button
                 className="dropdown-item"
                 name="Oldest First"
                 onClick={e => this.handleDropdownClick(e)}
               >
                 Oldest First
-              </a>
+              </button>
             </div>
-            <button
-              className="btn bg-light"
-              type="button"
-              value="NewNote"
-              name="newNote"
-              onClick={() => changePage('NewNote')}
-            >
-              {'➕'}
-            </button>
           </div>
+          <button
+            className="btn bg-light"
+            type="button"
+            value="NewNote"
+            name="newNote"
+            onClick={() => changePage('NewNote')}
+          >
+            {'➕'}
+          </button>
         </div>
       </nav>
     );

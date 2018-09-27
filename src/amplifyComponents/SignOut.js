@@ -3,9 +3,9 @@ import { Auth } from 'aws-amplify';
 
 const SignOut = () => {
   return (
-    <a href="# " className="dropdown-item" onClick={handleSignOut}>
+    <button className="dropdown-item" name="signout" onClick={handleSignOut}>
       Sign Out
-    </a>
+    </button>
   );
 };
 
