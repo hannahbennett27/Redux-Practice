@@ -1,27 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { changePage, deleteNote, toggleIsEditing } from '../actions';
-
-const mapStateToProps = state => {
-  return {
-    activePage: state.activePage
-  };
-};
+import { changePage } from '../actions';
 
 const mapDispatchToProps = dispatch => {
   return {
-    changePage: page => dispatch(changePage(page)),
-    deleteNote: noteTitle => deleteNote(noteTitle, dispatch),
-    toggleIsEditing: bool => dispatch(toggleIsEditing(bool))
+    changePage: page => dispatch(changePage(page))
   };
 };
 
-const NewNoteNavBar = ({
-  changePage,
-  deleteNote,
-  activePage,
-  toggleIsEditing
-}) => {
+export const NewNoteNavBar = ({ changePage }) => {
   return (
     <nav className="navbar navbar-light bg-light">
       <div className="input-group-prepend">
@@ -34,13 +21,11 @@ const NewNoteNavBar = ({
           {'⬅️'}
         </button>
       </div>
-
-      <div className="input-group-append" />
     </nav>
   );
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(NewNoteNavBar);
