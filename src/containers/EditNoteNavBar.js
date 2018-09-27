@@ -29,6 +29,7 @@ export const EditNoteNavBar = ({ deleteNote, activePage, toggleIsEditing }) => {
         <button
           className="btn bg-light"
           type="button"
+          name="back"
           onClick={() => toggleIsEditing(false)}
         >
           {'⬅️'}
@@ -36,8 +37,9 @@ export const EditNoteNavBar = ({ deleteNote, activePage, toggleIsEditing }) => {
       </div>
       <div className="input-group-append">
         <button
-          type="button"
           className="btn bg-light center"
+          type="button"
+          name="delete"
           onClick={() => deleteNote(activePage)}
         >
           {'🗑️'}

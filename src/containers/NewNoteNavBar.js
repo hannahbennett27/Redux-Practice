@@ -28,6 +28,7 @@ const NewNoteNavBar = ({
         <button
           className="btn bg-light"
           type="button"
+          name="back"
           onClick={() => changePage('UserHome')}
         >
           {'⬅️'}

@@ -7,6 +7,7 @@ const EditNoteNavBarComp = ({ deleteNote, activePage, toggleIsEditing }) => {
         <button
           className="btn bg-light"
           type="button"
+          name="back"
           onClick={() => toggleIsEditing(false)}
         >
           {'⬅️'}
@@ -16,6 +17,7 @@ const EditNoteNavBarComp = ({ deleteNote, activePage, toggleIsEditing }) => {
         <button
           type="button"
           className="btn bg-light center"
+          name="delete"
           onClick={() => deleteNote(activePage)}
         >
           {'🗑️'}

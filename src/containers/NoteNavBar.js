@@ -28,6 +28,7 @@ const NoteNavBar = ({
         <button
           className="btn bg-light"
           type="button"
+          name="back"
           onClick={() => changePage('UserHome')}
         >
           {'⬅️'}
@@ -38,6 +39,7 @@ const NoteNavBar = ({
         <button
           type="button"
           className="btn bg-light"
+          name="info"
           //   onClick={handle...}
         >
           {'ℹ️'}
@@ -45,6 +47,7 @@ const NoteNavBar = ({
         <button
           type="button"
           className="btn bg-light"
+          name="edit"
           onClick={() => toggleIsEditing(true)}
         >
           {'🖋️'}
@@ -52,6 +55,7 @@ const NoteNavBar = ({
         <button
           type="button"
           className="btn bg-light"
+          name="delete"
           onClick={() => deleteNote(activePage)}
         >
           {'🗑️'}

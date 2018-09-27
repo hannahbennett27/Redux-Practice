@@ -83,6 +83,7 @@ class EditNote extends Component {
                             className="btn bg-white bin-button"
                             type="button"
                             value={index}
+                            name="delete"
                             onClick={this.handleDeleteSubnote}
                           >
                             {'🗑️'}
@@ -97,6 +98,7 @@ class EditNote extends Component {
                 <button
                   type="button"
                   className="btn bg-light"
+                  name="save"
                   onClick={this.handleSave}
                 >
                   {'✅'}

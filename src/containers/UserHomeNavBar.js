@@ -106,6 +106,7 @@ class UserHomeNavBar extends Component {
               className="btn bg-light"
               type="button"
               value="NewNote"
+              name="newNote"
               onClick={() => changePage('NewNote')}
             >
               {'➕'}
