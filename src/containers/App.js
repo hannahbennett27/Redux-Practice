@@ -4,7 +4,7 @@ import aws_exports from '../aws-exports';
 import React from 'react';
 import '../App.css';
 import { Header } from '../components';
-import ActivePage from './ActivePage';
+import { ActivePage } from './';
 
 Amplify.configure(aws_exports);
 

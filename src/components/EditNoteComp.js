@@ -1,6 +1,12 @@
 import React from 'react';
 
-const EditNoteComp = ({ noteTitle, subnotes }) => {
+const EditNoteComp = ({
+  noteTitle,
+  subnotes,
+  handleChange,
+  handleSave,
+  handleDeleteSubnote
+}) => {
   const editTitle = (
     <div>
       <strong>Note Title</strong>
@@ -10,7 +16,7 @@ const EditNoteComp = ({ noteTitle, subnotes }) => {
           type="text"
           name="noteTitle"
           defaultValue={noteTitle}
-          onChange={this.handleChange}
+          onChange={handleChange}
         />
       </div>
     </div>
@@ -29,7 +35,7 @@ const EditNoteComp = ({ noteTitle, subnotes }) => {
               className="form-control form-control-sm text-muted"
               name="subnotes"
               defaultValue={subnote}
-              onChange={e => this.handleChange(e, index)}
+              onChange={e => handleChange(e, index)}
             />
             <span className="input-group-btn">
               <button
@@ -37,7 +43,7 @@ const EditNoteComp = ({ noteTitle, subnotes }) => {
                 type="button"
                 value={index}
                 name="delete"
-                onClick={this.handleDeleteSubnote}
+                onClick={handleDeleteSubnote}
               >
                 {'🗑️'}
               </button>
@@ -54,7 +60,7 @@ const EditNoteComp = ({ noteTitle, subnotes }) => {
         type="button"
         className="btn bg-light"
         name="save"
-        onClick={this.handleSave}
+        onClick={handleSave}
       >
         {'✅'}
       </button>
@@ -65,7 +71,7 @@ const EditNoteComp = ({ noteTitle, subnotes }) => {
     <div className="card mx-auto">
       <div className="card-body">
         {editTitle}
-        {subnotes.length ? editSubnotes : null}
+        {subnotes.length > 0 && editSubnotes}
         {editSave}
       </div>
     </div>

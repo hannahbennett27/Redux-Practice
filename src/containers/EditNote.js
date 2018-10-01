@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import EditNoteNavBar from './EditNoteNavBar';
-import { EditNoteComp } from '../components';
+import { EditNoteNavBar } from './';
+import { EditNoteComp, Error, Loading } from '../components';
 import { editNote } from '../actions';
-import { getNoteTitle } from '../utils';
+import { getNoteTitle, getActiveNote } from '../utils';
 
 const mapStateToProps = state => {
   return {
@@ -31,12 +31,9 @@ class EditNote extends Component {
 
   componentDidMount = () => {
     const { activePage, notes } = this.props;
-    const activeNote = notes.reduce((acc, el) => {
-      if (el.key === activePage) acc = el;
-      return acc;
-    }, {});
-    const noteTitle = getNoteTitle(activeNote);
-    const { key, createdAt, subnotes } = activeNote;
+    const { key, createdAt, subnotes } = getActiveNote(notes, activePage);
+    const noteTitle = getNoteTitle(activePage);
+
     this.setState({
       originalKey: key,
       noteTitle,
@@ -47,22 +44,30 @@ class EditNote extends Component {
 
   render() {
     const { notesLoading, notesError } = this.props;
-    // const displayLookUp = {}
+
     return (
       <div>
         <EditNoteNavBar />
-        {notesError && <p>ERROR</p>}
-        {notesLoading && <p>Note loading...</p>}
-        {!notesError && !notesLoading && <EditNoteComp {...this.state} />}
+        {notesError && <Error />}
+        {notesLoading && <Loading />}
+        {!notesError &&
+          !notesLoading && (
+            <EditNoteComp
+              {...this.state}
+              handleChange={this.handleChange}
+              handleSave={this.handleSave}
+              handleDeleteSubnote={this.handleDeleteSubnote}
+            />
+          )}
       </div>
     );
   }
 
   handleChange = (e, index) => {
+    console.log('change');
     let noteEdit = { ...this.state };
-    index !== undefined
-      ? (noteEdit[e.target.name][index] = e.target.value)
-      : (noteEdit[e.target.name] = e.target.value);
+    if (index === undefined) noteEdit[e.target.name] = e.target.value;
+    else noteEdit[e.target.name][index] = e.target.value;
     this.setState(noteEdit);
   };
 

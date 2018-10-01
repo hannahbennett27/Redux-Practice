@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import NoteNavBar from './NoteNavBar';
+import { Error, Loading } from '../components';
+import { NoteNavBar } from './';
 import { updateSubnotes } from '../actions';
-import { getNoteTitle } from '../utils';
+import { getNoteTitle, getActiveNote } from '../utils';
 
 const mapStateToProps = state => {
   return {
@@ -26,11 +27,8 @@ class Note extends Component {
   render() {
     const { activePage, notes, notesLoading, notesError } = this.props;
     const { newSubnote } = this.state;
-    const activeNote = notes.reduce((acc, el) => {
-      if (el.key === activePage) acc = el;
-      return acc;
-    }, {});
-    const noteTitle = getNoteTitle(activeNote);
+    const activeNote = getActiveNote(notes, activePage);
+    const noteTitle = getNoteTitle(activePage);
     const noteDisplay = (
       <div className="card mx-auto">
         <div className="card-body">
@@ -42,7 +40,6 @@ class Note extends Component {
               </small>
             );
           })}
-
           <textarea
             className="form-control form-control-sm"
             rows="2"
@@ -58,13 +55,9 @@ class Note extends Component {
     return (
       <div>
         <NoteNavBar />
-        {notesError ? (
-          <p>ERROR</p>
-        ) : notesLoading ? (
-          <p>Note loading...</p>
-        ) : (
-          noteDisplay
-        )}
+        {notesError && <Error />}
+        {notesLoading && <Loading />}
+        {!notesError && !notesLoading && noteDisplay}
       </div>
     );
   }

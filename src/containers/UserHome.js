@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Auth } from 'aws-amplify';
+import { Error, Loading } from '../components';
 import { retrieveNotes } from '../actions';
-import VisibleNotes from './VisibleNotes';
-import UserHomeNavBar from './UserHomeNavBar';
+import { VisibleNotes, UserHomeNavBar } from './';
 
 const mapStateToProps = state => {
   return {
@@ -40,13 +40,9 @@ class UserHome extends Component {
     return (
       <div>
         <UserHomeNavBar />
-        {notesError ? (
-          <p>ERROR</p>
-        ) : notesLoading ? (
-          <p>Notes loading...</p>
-        ) : (
-          <VisibleNotes />
-        )}
+        {notesError && <Error />}
+        {notesLoading && <Loading />}
+        {!notesError && !notesLoading && <VisibleNotes />}
       </div>
     );
   }

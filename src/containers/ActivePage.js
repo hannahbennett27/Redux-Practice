@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import UserHome from './UserHome';
-import NewNote from './NewNote';
-import Note from './Note';
-import EditNote from './EditNote';
+import { UserHome, NewNote, Note, EditNote } from './';
+import { Error } from '../components';
+import { isNoteActive } from '../utils';
 
 const mapStateToProps = state => {
   return {
@@ -12,24 +11,25 @@ const mapStateToProps = state => {
   };
 };
 
-const activePage = ({ activePage, isEditing }) => {
-  const noteRegExp = /.+.txt/;
+const pageSwitch = (activePage, isEditing) => {
+  if (isNoteActive(activePage)) {
+    return isEditing ? 'EditNote' : 'Note';
+  } else return activePage;
+};
 
-  switch (activePage) {
+const activePage = ({ activePage, isEditing }) => {
+  const page = pageSwitch(activePage, isEditing);
+  switch (page) {
     case 'UserHome':
       return <UserHome />;
     case 'NewNote':
       return <NewNote />;
+    case 'Note':
+      return <Note />;
+    case 'EditNote':
+      return <EditNote />;
     default:
-      return noteRegExp.test(activePage) ? (
-        isEditing ? (
-          <EditNote />
-        ) : (
-          <Note />
-        )
-      ) : (
-        <div>Default Page</div>
-      );
+      return <Error />;
   }
 };
 

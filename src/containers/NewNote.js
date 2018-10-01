@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createNote } from '../actions';
-import NewNoteNavBar from './NewNoteNavBar';
+import { NewNoteNavBar } from './';
 
 const mapDispatchToProps = dispatch => {
   return {

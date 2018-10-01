@@ -1,4 +1,16 @@
-export const getNoteTitle = noteObj => {
-  const titleRegExp = /(.+).txt/;
-  return titleRegExp.exec(noteObj.key)[1];
+const noteTitleRegExp = /(.+).txt/;
+
+export const isNoteActive = activePage => {
+  return noteTitleRegExp.test(activePage) ? true : false;
+};
+
+export const getNoteTitle = filename => {
+  return noteTitleRegExp.exec(filename)[1];
+};
+
+export const getActiveNote = (notes, filename) => {
+  return notes.reduce((acc, el) => {
+    if (el.key === filename) acc = el;
+    return acc;
+  }, {});
 };

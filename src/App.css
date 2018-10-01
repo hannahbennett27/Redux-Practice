@@ -4,6 +4,7 @@
 
 .App {
   text-align: center;
+  min-height: 100vh;
 }
 
 .App-header {
@@ -31,6 +32,10 @@
   padding: 0.5rem;
   margin: 0;
   text-align: left;
+}
+
+.error-body {
+  text-align: center;
 }
 
 .new-note-body {
@@ -61,4 +66,8 @@
 
 .bin-button {
   padding: 0.25rem;
+}
+
+p {
+  margin: 0;
 }

@@ -20,13 +20,10 @@ const mapDispatchToProps = dispatch => {
 const filterNotes = (notes, notesSearch) => {
   // const searchRegExp = new RegExp(`.?${notesSearch}.?`, 'i'); // Part-word matching
   const searchRegExp = new RegExp(`${notesSearch}`, 'i'); // Whole word matching
-
   return notes.filter(note => {
-    return searchRegExp.test(note.key)
-      ? note
-      : searchRegExp.test(note.subnotes.join(' '))
-        ? note
-        : null;
+    if (searchRegExp.test(note.key)) return note;
+    if (searchRegExp.test(note.subnotes.join(' '))) return note;
+    else return null;
   });
 };
 
@@ -36,13 +33,21 @@ const orderNotes = (notes, notesSort) => {
       return notes.sort((a, b) => {
         const titleA = a.key.toUpperCase();
         const titleB = b.key.toUpperCase();
-        return titleB < titleA ? 1 : titleB > titleA ? -1 : 0;
+        // => Conditional preference: if/else statement vs nested ternary
+        if (titleB < titleA) return 1;
+        if (titleB > titleA) return -1;
+        else return 0;
+        // return titleB < titleA ? 1 : titleB > titleA ? -1 : 0;
       });
     case 'Sort Z-A':
       return notes.sort((a, b) => {
         const titleA = a.key.toUpperCase();
         const titleB = b.key.toUpperCase();
-        return titleA < titleB ? 1 : titleA > titleB ? -1 : 0;
+        // => Conditional preference: if/else statement vs nested ternary
+        if (titleA < titleB) return 1;
+        if (titleA > titleB) return -1;
+        else return 0;
+        // return titleA < titleB ? 1 : titleA > titleB ? -1 : 0;
       });
     case 'Newest First':
       return notes.sort((a, b) => {
@@ -61,7 +66,7 @@ const VisibleNotes = ({ changePage, notes, notesSort, notesSearch }) => {
   const visibleNotes = orderNotes(filterNotes(notes, notesSearch), notesSort);
 
   return visibleNotes.map(note => {
-    const noteTitle = getNoteTitle(note);
+    const noteTitle = getNoteTitle(note.key);
     return note.eTag ? (
       <div className="card mx-auto" key={note.eTag}>
         <button
@@ -79,7 +84,7 @@ const VisibleNotes = ({ changePage, notes, notesSort, notesSearch }) => {
               <br />
               {note.subnotes.length
                 ? `- ${note.subnotes[0].slice(0, 40)}...`
-                : '...'}
+                : null}
             </small>
           </p>
         </button>
