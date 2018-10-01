@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import NoteNavBar from './NoteNavBar';
 import { updateSubnotes } from '../actions';
+import { getNoteTitle } from '../utils';
 
 const mapStateToProps = state => {
   return {
@@ -29,8 +30,7 @@ class Note extends Component {
       if (el.key === activePage) acc = el;
       return acc;
     }, {});
-    const titleRegExp = /(.+).txt/;
-    const noteTitle = titleRegExp.exec(activeNote.key)[1];
+    const noteTitle = getNoteTitle(activeNote);
     const noteDisplay = (
       <div className="card mx-auto">
         <div className="card-body">

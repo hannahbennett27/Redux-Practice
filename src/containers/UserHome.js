@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { Auth } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 import { retrieveNotes } from '../actions';
 import VisibleNotes from './VisibleNotes';
 import UserHomeNavBar from './UserHomeNavBar';
@@ -21,7 +21,11 @@ const mapDispatchToProps = dispatch => {
 class UserHome extends Component {
   componentDidMount = () => {
     const { retrieveNotes } = this.props;
-    retrieveNotes();
+    Auth.currentSession()
+      .then(res => {
+        retrieveNotes();
+      })
+      .catch(err => console.log(err));
     // Auth.currentAuthenticatedUser()
     //   .then(user => {
     //     console.log(user);

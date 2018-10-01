@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { changePage } from '../actions';
+import { getNoteTitle } from '../utils';
 
 const mapStateToProps = state => {
   return {
@@ -60,8 +61,7 @@ const VisibleNotes = ({ changePage, notes, notesSort, notesSearch }) => {
   const visibleNotes = orderNotes(filterNotes(notes, notesSearch), notesSort);
 
   return visibleNotes.map(note => {
-    const titleRegExp = /(.+).txt/;
-    const noteTitle = titleRegExp.exec(note.key)[1];
+    const noteTitle = getNoteTitle(note);
     return note.eTag ? (
       <div className="card mx-auto" key={note.eTag}>
         <button
