@@ -34,6 +34,10 @@ class UserHome extends Component {
     //   .catch(err => console.log(err));
   };
 
+  shouldComponentUpdate(nextState, nextProps) {
+    return false;
+  }
+
   render() {
     const { notesLoading, notesError } = this.props;
 
